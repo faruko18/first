@@ -1,0 +1,71 @@
+*{
+  box-sizing: border-box;
+}
+.container{
+  width: 90%;
+  padding: 10px 3px;
+  background: #ddd;
+  margin: 0 auto;
+  margin-top:5px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 3px 5px 9px rgba(0,0,0,0.4);
+}
+.display{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+.display input{
+  border-style: none;
+  outline: 0px;
+  border-radius: 0px;
+  padding: 5px 10px;
+}
+.inputs .input{
+  width: 100%;
+  font-size: 4rem;
+}
+.alert{
+  display: none;
+  position: absolute;
+  transition: all 0.6s;
+  top: 0px;
+  left: 0px;
+}
+#history_parent{
+  position: relative;
+  width: 85%;
+  background: rgba(200,200,200,0.5);
+  //border-top-left-radius: 10px;
+  //border-top-right-radius: 10px;
+  border-radius: 10px;
+  padding: 5px;
+  //overflow: scroll;
+  border: 2px solid #bbb;
+  margin: 5px auto;
+  box-shadow: 3px 5px 9px rgba(0,0,0,0.5), -2px 7px 3px rgba(0,0,0,0.5);
+}
+#history_parent ol{
+  width: 100%;
+  list-style-position: inside;
+  padding: 0;
+  margin: 0;
+}
+#history_parent ol li {
+  width: 100%;
+  margin: 5px 0;
+  padding: 2px 5px;
+  border-bottom: 2px solid #000;
+}
+.history{
+  border-bottom: 2px solid #aaa;
+}
+#sum{
+  border: none;
+  background: #ddd;
+}
+.sum2{
+  width: 100%;
+  //background: red;
+}

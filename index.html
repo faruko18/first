@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Calculator App</title>
+  <link rel="stylesheet" href="./assets/bootstrap.4.6.min.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="./style.css" type="text/css" media="all" />
+</head>
+<body>
+  <div class="container">
+    <h1 class="text-secondary text-center">Calculator</h1>
+    <div class="alert alert-danger" id="alert">
+    </div>
+    <div class="display input-group">
+      <input type="text" class="form-control w-50 bg-dark text-white" id="mc" value="" disabled/>
+      <input type="text" class="form-control w-50 bg-dark text-white" id="mp" value="" disabled/>
+      <input type="text" class="form-control w-100 bg-dark text-white text-right" id="show" value="" disabled/>
+      <input type="text"class="form-control w-100 bg-dark text-white text-right" id="auto" value="" disabled />
+    </div>
+    <div class="inputs">
+      <div class="input btn-group mt-2">
+      <input type="button" value="M+" class="btn btn-outline-info w-25" onclick="mpf()" />
+      <input type="button" value="M-" class="btn btn-outline-info w-25" onclick="mmf()" />
+      <input type="button" value="AC" class="btn btn-outline-info w-25" onclick="allClear()" />
+      <input type="button" value="<=" class="btn btn-outline-info w-25" onclick="show.value=show.value.slice(0,-1)" />
+      </div>
+      <div class="input btn-group mt-2">
+      <input type="button" value="7" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="8" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="9" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="/" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      </div>
+      <div class="input btn-group mt-2">
+      <input type="button" value="4" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="5" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="6" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="*" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      </div>
+      <div class="input btn-group mt-2">
+      <input type="button" value="1" class="btn btn-outline-info w-25" onclick="getValue(this.value)"/>
+      <input type="button" value="2" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="3" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="-" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      </div>
+      <div class="input btn-group mt-2">
+      <input type="button" value="0" class="btn btn-outline-info w-25" onclick="getValue(this.value)"/>
+      <input type="button" value="." class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="00" class="btn btn-outline-info w-25" onclick="getValue(this.value)" />
+      <input type="button" value="=" class="btn btn-outline-info w-25" onclick="calculet()" />
+      </div>
+    </div>
+  </div>
+  <div id="history_parent">
+    <h2 class="history text-center text-secondary">history</h2>
+    <ol id="ul">
+    </ol>
+   <h4 class="sum2"> 
+   Total Sum <input type="text" class="w-100" id="sum" value="" disabled />
+   </h4>
+  </div>
+  
+  <script type="text/javascript" charset="utf-8">
+    let show=document.getElementById('show');
+    let showAlert=document.getElementById('alert');
+    let autoShow=document.getElementById('auto');
+    let mp=document.getElementById('mp');
+    let mc=document.getElementById('mc');
+    let sum=document.getElementById('sum');
+    let li=document.getElementsByClassName('li');
+    function getValue(v){
+      if(show.value==''&& v=='*'||show.value =='' && v=='+'|| show.value=='' && v=='/'){
+        show.value='';
+      }else{
+        show.value+=v;
+      }
+    }
+    function historyfun(his){
+      let ul=document.getElementById('ul');
+      ul.innerHTML+="<li class='li'>"+his+" = "+eval(his)+"</li>";
+    }
+    function sumli(li){
+      let sumtotal="";
+      sumtotal=Number(li)+Number(sum.value);
+      sum.value=sumtotal;
+    }
+    function calculet(){
+      try{
+        showAlert.style.display='none';
+        if(show.value==''){
+          show.value='';
+        }else{
+      historyfun(show.value);
+      show.value=eval(show.value);
+      sumli(show.value);
+      autoShow.value='';
+        }
+      }catch(e){
+        console.log(e);
+        showAlert.innerHTML='Wrong Your Value';
+         showAlert.style.display='block';
+      }
+    }
+    function calAuto(){
+      try{
+        if(show.value==''){
+          autoShow.value='';
+        }else{
+      autoShow.value=eval(show.value);
+        }
+      }catch(e){
+       setInterval(calAuto,500);
+      }
+    }
+    setInterval(calAuto,500);
+    
+    function allClear(){
+      show.value=''; autoShow.value='';
+    }
+    function mpf(){
+      mp.value=Number(show.value)+Number(mp.value);
+      if(mp.value>0){
+      mc.value++;
+      }
+    }
+    function mmf(){
+      mp.value=Number(mp.value)-Number(show.value);
+      if(mp.value>-1){
+      mc.value=Number(mc.value)-1;
+      }
+    }
+    
+  </script>
+</body>
+</html>
